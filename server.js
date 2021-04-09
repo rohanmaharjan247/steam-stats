@@ -20,7 +20,7 @@ app.use(express.static(path));
 const steamRoutes = require(authRoutesPath)(app);
 const csGoRoutes = require(csgoStatsPath)(app);
 app.get("/", (req, res) => {
-  res.sendFile(path + "/index.html");
+  res.sendFile(path.join(path + "/index.html"));
 });
 
 app.listen(port, () => {
