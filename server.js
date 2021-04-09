@@ -12,8 +12,8 @@ const csgoStatsPath = (environment === "development")? "./steam-serve/steam-rout
 app.use(cors());
 app.use(express.static(path));
 
-const steamRoutes = require(authRoutesPath)(app);
-const csGoRoutes = require(csgoStatsPath)(app);
+// const steamRoutes = require(authRoutesPath)(app);
+// const csGoRoutes = require(csgoStatsPath)(app);
 app.get("/", (req, res) => {
   res.sendFile(path + "index.html");
 });
