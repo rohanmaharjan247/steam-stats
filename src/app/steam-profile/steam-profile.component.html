@@ -1,0 +1,181 @@
+<ng-container *ngIf="platformInfo != undefined">
+  <div class="card">
+    <div class="d-flex align-items-center">
+      <div class="image">
+        <img [src]="platformInfo.avatarUrl" class="rounded" />
+      </div>
+      <div class="ml-3 w-100">
+        <h4 class="mb-0 mt-0">
+          {{ platformInfo.platformUserHandle }}
+        </h4>
+        <span>Overview</span>
+        <ng-container *ngIf="this.stats != undefined">
+          <div
+            class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats"
+          >
+            <div class="d-flex flex-column">
+              <span class="articles">{{
+                this.stats.timePlayed.displayName
+              }}</span>
+              <span class="number1">{{
+                this.stats.timePlayed.displayValue
+              }}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="followers"
+                >{{ this.stats.matchesPlayed.displayName }}</span
+              >
+              <span class="number2">{{
+                this.stats.matchesPlayed.displayValue
+              }}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="rating">{{ this.stats.kd.displayName }}</span>
+              <span class="number3">{{ this.stats.kd.displayValue }}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="rating"
+                >{{ this.stats.kills.displayName }}</span
+              >
+              <span class="number3">{{ this.stats.kills.displayValue }}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="rating">{{ this.stats.wins.displayName }}</span>
+              <span class="number3">{{ this.stats.wins.displayValue }}</span>
+            </div>
+            <div class="d-flex flex-column">
+              <span class="rating"
+                >{{ this.stats.wlPercentage.displayName }}</span
+              >
+              <span class="number3">{{
+                this.stats.wlPercentage.displayValue
+              }}</span>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="button mt-2 d-flex flex-row align-items-center">
+          <button class="btn btn-sm btn-outline-primary w-100" (click)="logout()">Logout</button>          
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="stats != undefined">
+  <div class="form-group row">
+    <ng-container *ngFor="let stat of stats | keyvalue">
+      <div class="col-md-3" *ngIf="checkKeys(stat.key)">
+        <div class="card stats-card">
+          <div class="card-body">
+            <h5 class="card-title">{{ stat.value["displayName"] }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ stat.value["value"] | number }}
+            </h6>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a> -->
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div>
+    <!-- <table>
+      <tr>
+        <th *ngFor="let s of stats[0].stats | keyvalue">
+          {{ s.value["displayName"] }}
+        </th>
+      </tr>
+      <tr *ngFor="let stat of stats">
+        <td *ngFor="let s of stat.stats | keyvalue">
+          {{ s.value["value"] | number }}
+        </td>
+      </tr>
+    </table> -->
+  </div>
+</ng-container>
+
+<div class="row">
+  <ng-container *ngIf="weaponStats != undefined">
+    <div class="col">
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Weapon</th>
+                <th>Category</th>
+                <th *ngFor="let stat of weaponStats[0].stats | keyvalue">
+                  {{ stat.value["displayName"] }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let weaponStat of weaponStats
+                    | slice: (page - 1) * pageSize:page * pageSize
+                "
+              >
+                <td>
+                  {{ weaponStat.metadata.name }}
+                </td>
+                <td>
+                  {{ weaponStat.metadata.category.displayValue }}
+                </td>
+                <td *ngFor="let stat of weaponStat.stats | keyvalue">
+                  {{ stat.value["displayValue"] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="weaponStats.length"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mapStats != undefined">
+    <div class="col">
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Map</th>
+
+                <th *ngFor="let stat of mapStats[0].stats | keyvalue">
+                  {{ stat.value["displayName"] }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let mapStat of mapStats
+                    | slice: (pageMap - 1) * pageSizeMap:pageMap * pageSizeMap
+                "
+              >
+                <td>
+                  {{ mapStat.metadata.name }}
+                </td>
+                <td *ngFor="let stat of mapStat.stats | keyvalue">
+                  {{ stat.value["displayValue"] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ngb-pagination
+            [(page)]="pageMap"
+            [pageSize]="pageSizeMap"
+            [collectionSize]="mapStats.length"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
