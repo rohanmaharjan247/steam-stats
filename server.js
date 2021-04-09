@@ -19,7 +19,7 @@ app.use(express.static(path));
 
 const steamRoutes = require(authRoutesPath)(app);
 const csGoRoutes = require(csgoStatsPath)(app);
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(path + "/index.html"));
 });
 
