@@ -6,7 +6,7 @@ const environment = process.env.NODE_ENV || "development";
 
 const steam = new SteamAuth({
   realm: (environment === "development")? "http://localhost:8083" : "https://game-stats-steam.herokuapp.com", // Site name displayed to users on logon
-  returnUrl: (environment === "development")? "http://localhost:8083/auth/steam/authenticate": "https://game-stats-steam.herokuapp.com", // Your return route
+  returnUrl: (environment === "development")? "http://localhost:8083/auth/steam/authenticate": "https://game-stats-steam.herokuapp.com/auth/steam/authenticate", // Your return route
   apiKey: apiKey, // Steam API key
 });
 

@@ -40,31 +40,28 @@ export class SteamProfileComponent implements OnInit {
 
   authenticate() {
     this._steamService.authenticate().subscribe((data: any) => {
-      console.log('authenticated');
+      
     });
   }
 
   getPlayerProfile() {
-    this._steamService.getProfile().subscribe((data: any) => {
-      console.log('Player profile', data);
+    this._steamService.getProfile().subscribe((data: any) => {      
       this.stats = data.data.segments[0].stats;
       this.platformInfo = data.data.platformInfo;
       this.title.setTitle(
         `${this.platformInfo.platformUserHandle}'s Profile - CSGO Stats`
       );
-      console.log(this.stats, 'stats');
+      
     });
   }
 
   getProfileSegment() {
     this._steamService
       .getProfileStatsSegment('weapon')
-      .subscribe((data: any) => {
-        console.log('player segment', data);
+      .subscribe((data: any) => {        
         this.weaponStats = data.data;
       });
-      this._steamService.getProfileStatsSegment('map').subscribe((data:any)=>{
-        console.log('player map segment', data);
+      this._steamService.getProfileStatsSegment('map').subscribe((data:any)=>{        
         this.mapStats = data.data;
       })
   }
@@ -103,11 +100,5 @@ export class SteamProfileComponent implements OnInit {
       default:
         return false;
     }
-  }
-
-  getStatsKeys() {
-    console.log(this.stats);
-    let statKeys = Object.keys(this.stats[0].stats);
-    console.log(statKeys);
   }
 }

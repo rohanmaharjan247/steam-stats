@@ -8,13 +8,10 @@ import { SteamService } from './services/steam.service';
 })
 export class AppComponent implements OnInit{
   title = 'steam-stats';
-  constructor(private _steamService: SteamService){
+  constructor(){
 
   }
 
   ngOnInit(){
-    this._steamService.test().subscribe((data:any)=>{
-      console.log(data);
-    })
   } 
 }
