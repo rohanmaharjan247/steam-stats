@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/steam-serve/node-modules
 
 # profiling files
 chrome-profiler-events*.json
