@@ -11,6 +11,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: SteamProfileComponent
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 
