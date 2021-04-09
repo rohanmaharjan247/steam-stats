@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { SteamService } from '../services/steam.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class SteamLoginComponent implements OnInit {
 
   authUrl = '';
 
-  constructor(private _steamService: SteamService) { }
+  constructor(private _steamService: SteamService, private title: Title) {
+    this.title.setTitle('Login - CSGO Stats');
+   }
 
   ngOnInit(): void {
     this.login();
